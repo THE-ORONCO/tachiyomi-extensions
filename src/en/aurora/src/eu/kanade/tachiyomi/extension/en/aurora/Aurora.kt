@@ -144,9 +144,8 @@ class Aurora : HttpSource() {
         val chapterArchiveUrl = "$baseUrl/archive/"
 
         val chapterOverviewDoc = client.newCall(GET(chapterArchiveUrl, headers)).execute().asJsoup()
-        val chapterBlockElements = chapterOverviewDoc.select(".wp-block-image")
+        val chapterBlockElements = chapterOverviewDoc.select(".wp-block-image:has(a)")
         val mangasFromChapters: List<SManga> = chapterBlockElements
-            .filter { it -> it.selectFirst("a") != null }
             .mapIndexed { chapterIndex, chapter ->
                 val chapterOverviewLink = chapter.selectFirst("a")!!
                 val chapterOverviewUrl = chapterOverviewLink.attr("href")
