@@ -30,7 +30,7 @@ class Aurora : HttpSource() {
     override fun chapterListParse(response: Response): List<SChapter> = throw Exception("Not used")
 
     override fun fetchChapterList(manga: SManga): Observable<List<SChapter>> {
-        return Observable.just(fetchChapterListTR(baseUrl + manga.url, mutableListOf()))
+        return Observable.just(fetchChapterListTR(baseUrl + manga.url, mutableListOf()).reversed())
     }
 
     private tailrec fun fetchChapterListTR(
